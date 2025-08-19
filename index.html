@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafetería Delicias - Café y Pan Artesanal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #5D4037;
+            --color-secondary: #D7CCC8;
+            --color-accent: #FF5722;
+            --color-light: #F5F5F5;
+            --color-dark: #3E2723;
+            --color-text: #212121;
+            --color-background: #FFF9F0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--color-primary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--color-accent);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 5px;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #E64A19;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--color-accent);
+            bottom: 0;
+            left: 25%;
+        }
+        
+        /* About Section */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Mission Section */
+        .mission {
+            background-color: var(--color-light);
+        }
+        
+        .mission-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .mission-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mission-img img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        /* Services */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .service-info {
+            padding: 20px;
+        }
+        
+        .service-info h3 {
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+        
+        /* Branches */
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .branch-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .branch-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+        }
+        
+        /* Store */
+        .store-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .categories {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .categories h3 {
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+        
+        .categories ul {
+            list-style: none;
+        }
+        
+        .categories li {
+            margin-bottom: 10px;
+        }
+        
+        .categories a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .categories a:hover {
+            color: var(--color-accent);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--color-accent);
+            font-size: 1.2rem;
+        }
+        
+        .cart-btn {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .cart-btn:hover {
+            background: var(--color-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--color-primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--color-accent);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--color-accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .about-container, .mission-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .store-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Delicias <span>del Café</span></a>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">¿Quiénes Somos?</a></li>
+                    <li><a href="#mision">Misión</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#sucursales">Sucursales</a></li>
+                    <li><a href="#tienda">Tienda en Línea</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Bienvenidos a Delicias del Café</h1>
+            <p>Disfruta del mejor café y panadería artesanal en un ambiente acogedor</p>
+            <a href="#tienda" class="btn">Ordenar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos Section -->
+    <section id="nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Quiénes Somos?</h2>
+            </div>
+            <div class="about-container">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Interior de la cafetería">
+                </div>
+                <div class="about-text">
+                    <p>Delicias del Café nació en 2010 como un pequeño proyecto familiar con la pasión por ofrecer café de alta calidad y panadería recién horneada. Hoy somos una cadena de cafeterías comprometida con el origen sostenible de nuestros granos y la elaboración artesanal de nuestros productos.</p>
+                    <p>Nuestro equipo está formado por baristas profesionales y panaderos con años de experiencia, dedicados a crear experiencias memorables para nuestros clientes a través de sabores auténticos y un servicio excepcional.</p>
+                    <p>Trabajamos directamente con productores de café en América Latina, asegurando prácticas de comercio justo y sostenibilidad ambiental. Nuestros panes son elaborados diariamente con ingredientes frescos y técnicas tradicionales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión Section -->
+    <section id="mision" class="mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Misión</h2>
+            </div>
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p>Nuestra misión es simple pero poderosa: queremos ser el lugar donde las personas se reúnen para disfrutar de los mejores momentos, acompañados de un excelente café y deliciosos productos de panadería.</p>
+                    <p>Nos esforzamos por:</p>
+                    <ul>
+                        <li>Ofrecer productos de la más alta calidad, desde el grano hasta la taza</li>
+                        <li>Mantener prácticas sostenibles y de comercio justo con nuestros proveedores</li>
+                        <li>Crear un ambiente acogedor donde todos se sientan como en casa</li>
+                        <li>Innovar constantemente en sabores y técnicas mientras honramos las tradiciones</li>
+                    </ul>
+                </div>
+                <div class="mission-img">
+                    <img src="https://images.unsplash.com/photo-1463797221720-6b07e6426c24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Barista preparando café">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Servicios</h2>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Café de especialidad" class="service-img">
+                    <div class="service-info">
+                        <h3>Café de Especialidad</h3>
+                        <p>Preparamos café con granos seleccionados de las mejores regiones, tostados localmente para garantizar frescura y sabor.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Panadería artesanal" class="service-img">
+                    <div class="service-info">
+                        <h3>Panadería Artesanal</h3>
+                        <p>Elaboramos panes, pasteles y postres diariamente usando métodos tradicionales e ingredientes de primera calidad.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1519671482749-5f3958c6a475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Eventos y catering" class="service-img">
+                    <div class="service-info">
+                        <h3>Eventos y Catering</h3>
+                        <p>Ofrecemos servicios de catering para eventos empresariales y celebraciones, con opciones personalizadas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sucursales Section -->
+    <section id="sucursales" class="mission">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestras Sucursales</h2>
+            </div>
+            <div class="branches">
+                <div class="branch-card">
+                    <h3>Sucursal Centro</h3>
+                    <p>📍 Av. Principal #123, Centro Histórico</p>
+                    <p>🕒 Lunes a Viernes: 7:00 am - 10:00 pm</p>
+                    <p>🕒 Sábados y Domingos: 8:00 am - 11:00 pm</p>
+                    <p>📞 (123) 456-7890</p>
+                </div>
+                <div class="branch-card">
+                    <h3>Sucursal Norte</h3>
+                    <p>📍 Plaza Comercial Norte, Local #45</p>
+                    <p>🕒 Lunes a Domingo: 8:00 am - 10:00 pm</p>
+                    <p>📞 (123) 456-7891</p>
+                </div>
+                <div class="branch-card">
+                    <h3>Sucursal Sur</h3>
+                    <p>📍 Calle Jardín #567, Zona Residencial</p>
+                    <p>🕒 Lunes a Viernes: 7:00 am - 9:00 pm</p>
+                    <p>🕒 Sábados y Domingos: 8:00 am - 9:00 pm</p>
+                    <p>📞 (123) 456-7892</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tienda Section -->
+    <section id="tienda">
+        <div class="container">
+            <div class="section-title">
+                <h2>Tienda en Línea</h2>
+            </div>
+            <div class="store-container">
+                <div class="categories">
+                    <h3>Categorías</h3>
+                    <ul>
+                        <li><a href="#">Café en Grano</a></li>
+                        <li><a href="#">Café Molido</a></li>
+                        <li><a href="#">Panes</a></li>
+                        <li><a href="#">Pasteles</a></li>
+                        <li><a href="#">Postres</a></li>
+                        <li><a href="#">Mercancía</a></li>
+                    </ul>
+                </div>
+                <div class="products">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Café Colombia Supremo" class="product-img">
+                        <div class="product-info">
+                            <h3>Café Colombia Supremo</h3>
+                            <p>Café 100% arábico tostado medio, con notas de caramelo y nuez.</p>
+                            <p class="price">$12.50 / 500g</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1583085520774-503aa6e8060e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Croissants Artesanales" class="product-img">
+                        <div class="product-info">
+                            <h3>Croissants Artesanales</h3>
+                            <p>Pack de 6 croissants de mantequilla, horneados diariamente.</p>
+                            <p class="price">$8.99 / pack</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pan de Centeno" class="product-img">
+                        <div class="product-info">
+                            <h3>Pan de Centeno Tradicional</h3>
+                            <p>Pan de centeno con masa madre, elaborado con métodos tradicionales.</p>
+                            <p class="price">$6.50 / unidad</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Café Etiopía Yirgacheffe" class="product-img">
+                        <div class="product-info">
+                            <h3>Café Etiopía Yirgacheffe</h3>
+                            <p>Café de tueste claro con notas cítricas y florales, ideal para métodos de filtro.</p>
+                            <p class="price">$14.75 / 500g</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tarta de Manzana" class="product-img">
+                        <div class="product-info">
+                            <h3>Tarta de Manzana Casera</h3>
+                            <p>Tarta de manzana con canela, elaborada con manzanas selectas y masa quebrada.</p>
+                            <p class="price">$18.99 / unidad</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1608190003443-86a8c7d6d6f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pan de Campaña" class="product-img">
+                        <div class="product-info">
+                            <h3>Pan de Campaña Rústico</h3>
+                            <p>Pan rústico de miga abierta y corteza crujiente, elaborado con harina orgánica.</p>
+                            <p class="price">$7.80 / unidad</p>
+                            <button class="cart-btn">Añadir al Carrito</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Delicias del Café</h3>
+                    <p>El mejor café y panadería artesanal en la ciudad. Desde 2010 sirviendo momentos inolvidables.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Horario</h3>
+                    <p>Lunes a Viernes: 7:00 am - 10:00 pm</p>
+                    <p>Sábados y Domingos: 8:00 am - 11:00 pm</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📞 (123) 456-7890</p>
+                    <p>✉️ info@deliciascafe.com</p>
+                    <p>📍 Av. Principal #123, Centro</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Delicias del Café. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efectos de navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Efecto de carga para elementos
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+        });
+        
+        // Funcionalidad básica del carrito
+        const cartButtons = document.querySelectorAll('.cart-btn');
+        cartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const product = this.parentElement.querySelector('h3').textContent;
+                this.textContent = '✓ Añadido';
+                this.style.background = '#4caf50';
+                
+                setTimeout(() => {
+                    this.textContent = 'Añadir al Carrito';
+                    this.style.background = '#5d4037';
+                }, 2000);
+                
+                console.log(`Producto añadido: ${product}`);
+            });
+        });
+    </script>
+</body>
+</html>
